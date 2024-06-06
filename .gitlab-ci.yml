@@ -2,8 +2,8 @@ image: alpine:latest
 
 pages:
   script:
-    - mkdir .public
-    - cp -r * .public
+    - mkdir -p .public
+    - cp -f index.htm .public/index.htm
   artifacts:
     paths:
       - public
