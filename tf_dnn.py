@@ -85,14 +85,14 @@ print(f"{watermelon_qty} {apple_qty} {grape_qty} = {exact}, predict:{prediction[
 
 #model.export('save_all') # this is a dir
 #model.save('save_tf', save_format='tf') # need keras < 3.0, and doesn't work
-#model.save('save/tf_dnn.keras')
-#model.save('save/tf_dnn.h5', save_format='h5')
-import tensorflowjs as tfjs
-tfjs.converters.save_keras_model(model, 'tfjs')
+#model.save('save/tf_dnn.keras') # not ok
+model.save('save/tf_dnn.h5', save_format='h5')
+#import tensorflowjs as tfjs
+#tfjs.converters.save_keras_model(model, 'tfjs')
 
 # Save model architecture to JSON
 #model_json = model.to_json()
-#with open('/tmp/tmp/my_model_tf/model_architecture.json', 'w') as json_file:
+#with open('tfjs/model.json', 'w') as json_file:
 #    json_file.write(model_json)
 
 # Save weights to HDF5
