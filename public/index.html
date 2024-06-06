@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>TensorFlow.js Model Inference</title>
-    <!-- Load a specific version of TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 </head>
 <body>
     <h1>Predict Fruit Cost using TensorFlow.js</h1>
@@ -25,35 +24,30 @@
 
     <script>
         async function loadModel() {
+            // URL where the model.json file is hosted
+            //const modelUrl = 'https://jiechau.github.io/tf_dnn_js/model.json';
             const modelUrl = 'model.json';
-            console.log('Loading model from', modelUrl);
             
             // Load the model
             const model = await tf.loadLayersModel(modelUrl);
-            console.log('Model loaded successfully:', model);
-            console.log('Model summary:', model.summary());
             return model;
         }
 
-        async function predictCost(model, inputs) {
-            console.log('Inputs:', inputs);
-            
+        async function predictCost(model, watermelons, apples, grapes) {
             // Prepare the input tensor
-            const inputTensor = tf.tensor2d([inputs], [1, 3]);
-            console.log('Input tensor:', inputTensor);
+            const inputTensor = tf.tensor2d([[watermelons, apples, grapes]]);
             
             // Make the prediction
             const prediction = model.predict(inputTensor);
-            console.log('Prediction tensor:', prediction);
             
             // Extract the prediction value
             const predictedValue = prediction.dataSync()[0];
-            console.log('Predicted value:', predictedValue);
             
             // Return the predicted value
             return predictedValue;
         }
 
+        // When the form is submitted
         document.getElementById('fruitForm').addEventListener('submit', async function(event) {
             event.preventDefault();
             
@@ -62,22 +56,14 @@
             const apples = parseInt(document.getElementById('apples').value);
             const grapes = parseInt(document.getElementById('grapes').value);
             
-            // Combine inputs into an array
-            const inputs = [watermelons, apples, grapes];
-            
             // Load the model
-            try {
-                const model = await loadModel();
-                
-                // Predict the cost
-                const predictedCost = await predictCost(model, inputs);
-                
-                // Display the result
-                document.getElementById('predictionResult').innerText = `Predicted Cost: $${predictedCost.toFixed(2)}`;
-            } catch (error) {
-                console.error('Error during prediction:', error);
-                document.getElementById('predictionResult').innerText = 'Error predicting cost. See console for details.';
-            }
+            const model = await loadModel();
+            
+            // Predict the cost
+            const predictedCost = await predictCost(model, watermelons, apples, grapes);
+            
+            // Display the result
+            document.getElementById('predictionResult').innerText = `Predicted Cost: $${predictedCost.toFixed(2)}`;
         });
     </script>
 </body>
