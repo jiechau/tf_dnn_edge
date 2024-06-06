@@ -23,16 +23,16 @@
     <p id="predictionResult">Please enter quantities and click "Predict Cost"</p>
 
     <script>
-        async function loadModel() {
-            const modelUrl = 'model.json';
-            const model = await tf.loadLayersModel(modelUrl);
-            
-            // Explicitly set input shape
-            model.layers[0].batchInputShape = [null, 3];
-            model.layers[0].inputShape = [3];
-            
-            return model;
-        }
+async function loadModel() {
+    const modelUrl = 'model.json';
+
+    // Load the model
+    const model = await tf.loadLayersModel(modelUrl, {
+        batchInputShape: [null, 3] // Specify the batch input shape
+    });
+
+    return model;
+}
 
         async function predictCost(model, inputs) {
             const inputTensor = tf.tensor2d([inputs]);
