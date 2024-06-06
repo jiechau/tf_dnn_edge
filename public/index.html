@@ -23,15 +23,25 @@
     <p id="predictionResult">Please enter quantities and click "Predict Cost"</p>
 
     <script>
-        async function loadModel() {
-            const modelUrl = 'model.json';
-            console.log('Loading model from', modelUrl);
-            
-            // Load the model
-            const model = await tf.loadLayersModel(modelUrl);
-            console.log('Model loaded successfully:', model);
-            return model;
-        }
+async function loadModel() {
+    // URL where the model.json file is hosted
+    const modelUrl = 'model.json';
+
+    // URL where the weight file is hosted
+    const weightsUrl = 'group1-shard1of1.bin';
+
+    // Load the model architecture
+    const model = await tf.loadLayersModel(modelUrl);
+
+    // Load the weight data
+    const weightData = await fetch(weightsUrl).then(resp => resp.arrayBuffer());
+
+    // Load the weight data into the model
+    await model.loadWeights(weightData);
+
+    return model;
+}
+
 
         async function predictCost(model, inputs) {
             console.log('Inputs:', inputs);
