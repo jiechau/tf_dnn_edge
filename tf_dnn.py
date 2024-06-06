@@ -80,8 +80,9 @@ new_data = np.array([[watermelon_qty, apple_qty, grape_qty]])  # Example input: 
 prediction = model.predict(new_data)
 print(f"{watermelon_qty} {apple_qty} {grape_qty} = {exact}, predict:{prediction[0][0]:.0f}")
 
+model.export('save_all') # this is a dir
 #model.save('save/tf_dnn.keras')
-model.save('save/tf_dnn.h5', save_format='h5')
+#model.save('save/tf_dnn.h5', save_format='h5')
 
 # Save model architecture to JSON
 #model_json = model.to_json()
