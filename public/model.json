@@ -89,47 +89,41 @@
       ]
     }
   },
-
-
-
-"weightsManifest": [
-	  {
-		      "paths": ["group1-shard1of1.bin"],
-		          "weights": [
-				        {
-						        "name": "layers/dense/vars/0",
-							        "shape": [3, 64],
-								        "dtype": "float32"
-									      },
-									            {
-											            "name": "layers/dense/vars/1",
-												            "shape": [64],
-													            "dtype": "float32"
-														          },
-															        {
-																	        "name": "layers/dense_1/vars/0",
-																		        "shape": [64, 32],
-																			        "dtype": "float32"
-																				      },
-																				            {
-																						            "name": "layers/dense_1/vars/1",
-																							            "shape": [32],
-																								            "dtype": "float32"
-																									          },
-																										        {
-																												        "name": "layers/dense_2/vars/0",
-																													        "shape": [32, 1],
-																														        "dtype": "float32"
-																															      },
-																															            {
-																																	            "name": "layers/dense_2/vars/1",
-																																		            "shape": [1],
-																																			            "dtype": "float32"
-																																				          }
-																																					      ]
-																																					        }
-]
-
-
+  "weightsManifest": [
+    {
+      "paths": ["tf_dnn_js/group1-shard1of1.bin"],
+      "weights": [
+        {
+          "name": "dense/kernel",
+          "shape": [3, 64],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense/bias",
+          "shape": [64],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense_1/kernel",
+          "shape": [64, 32],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense_1/bias",
+          "shape": [32],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense_2/kernel",
+          "shape": [32, 1],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense_2/bias",
+          "shape": [1],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ]
 }
-
