@@ -33,9 +33,9 @@
             return model;
         }
 
-        async function predictCost(model, watermelons, apples, grapes) {
+        async function predictCost(model, inputs) {
             // Prepare the input tensor
-            const inputTensor = tf.tensor2d([[watermelons, apples, grapes]]);
+            const inputTensor = tf.tensor2d([inputs]);
             
             // Make the prediction
             const prediction = model.predict(inputTensor);
@@ -56,11 +56,14 @@
             const apples = parseInt(document.getElementById('apples').value);
             const grapes = parseInt(document.getElementById('grapes').value);
             
+            // Combine inputs into an array
+            const inputs = [watermelons, apples, grapes];
+            
             // Load the model
             const model = await loadModel();
             
             // Predict the cost
-            const predictedCost = await predictCost(model, watermelons, apples, grapes);
+            const predictedCost = await predictCost(model, inputs);
             
             // Display the result
             document.getElementById('predictionResult').innerText = `Predicted Cost: $${predictedCost.toFixed(2)}`;
