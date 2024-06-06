@@ -6,4 +6,4 @@ pages:
     - cp -f index.htm .public/index.htm
   artifacts:
     paths:
-      - public
+      - .public
