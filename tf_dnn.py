@@ -39,8 +39,10 @@ Use this existing df as the training dataset to train a regression model.
 利用這個現有的 df 當做訓練數據集。訓練一個回歸的模型。
 '''
 import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
+import tf_keras as keras # need keras < 3.0
+from tf_keras import layers # need keras < 3.0
+#from tensorflow import keras
+#from tensorflow.keras import layers
 
 # Split the data into features (X) and target (y)
 X = df[['watermelon', 'apple', 'grape']].values
@@ -58,8 +60,9 @@ model = keras.Sequential([
 ])
 
 # Compile the model
-optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
-model.compile(optimizer=optimizer, loss='mean_squared_error')
+#optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
+#model.compile(optimizer=optimizer, loss='mean_squared_error')
+model.compile(loss='mean_squared_error') # need keras < 3.0
 
 # Train the model
 model.fit(X_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, validation_data=(X_test, y_test), 
@@ -80,7 +83,8 @@ new_data = np.array([[watermelon_qty, apple_qty, grape_qty]])  # Example input: 
 prediction = model.predict(new_data)
 print(f"{watermelon_qty} {apple_qty} {grape_qty} = {exact}, predict:{prediction[0][0]:.0f}")
 
-model.export('save_all') # this is a dir
+#model.export('save_all') # this is a dir
+model.save('save_tf', save_format='tf') # need keras < 3.0
 #model.save('save/tf_dnn.keras')
 #model.save('save/tf_dnn.h5', save_format='h5')
 
