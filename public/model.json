@@ -91,7 +91,7 @@
   },
   "weightsManifest": [
     {
-      "paths": ["tf_dnn_js/group1-shard1of1.bin"],
+      "paths": ["group1-shard1of1.bin"],
       "weights": [
         {
           "name": "dense/kernel",
