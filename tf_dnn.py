@@ -54,7 +54,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Build the model
 model = keras.Sequential([
-    layers.Dense(64, activation='relu', input_shape=[3]),
+    layers.Input(shape=(3,)),  # Ensure input shape is explicitly specified here
+    layers.Dense(64, activation='relu'),
     layers.Dense(32, activation='relu'),
     layers.Dense(1, activation='linear')
 ])
@@ -66,7 +67,7 @@ model.compile(optimizer=optimizer, loss='mean_squared_error')
 
 # Train the model
 model.fit(X_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, validation_data=(X_test, y_test), 
-          verbose=0)
+          verbose=1)
 
 
 '''
@@ -85,8 +86,8 @@ print(f"{watermelon_qty} {apple_qty} {grape_qty} = {exact}, predict:{prediction[
 
 #model.export('save_all') # this is a dir
 #model.save('save_tf', save_format='tf') # need keras < 3.0, and doesn't work
-#model.save('save/tf_dnn.keras') # not ok
-model.save('save/tf_dnn.h5', save_format='h5')
+model.save('save/tf_dnn.keras') # 
+#model.save('save/tf_dnn.h5', save_format='h5')
 #import tf_keras
 #tf_keras.saving.save_model(model, 'save/tf_dnn.keras')
 #import tensorflowjs as tfjs
