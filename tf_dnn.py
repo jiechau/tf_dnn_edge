@@ -54,10 +54,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Build the model
 model = keras.Sequential([
-    layers.Input(shape=(3,)),  # Ensure input shape is explicitly specified here
-    layers.Dense(64, activation='relu'),
+    #layers.Input(shape=(3,)),  # Ensure input shape is explicitly specified here
+    layers.Dense(64, activation='relu', input_shape=[3]),
     layers.Dense(32, activation='relu'),
-    layers.Dense(1, activation='linear')
+    layers.Dense(1)
+    #layers.Dense(1, activation='linear')
 ])
 
 # Compile the model
