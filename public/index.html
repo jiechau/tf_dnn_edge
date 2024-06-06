@@ -24,48 +24,36 @@
 
     <script>
         async function loadModel() {
-            // URL where the model.json file is hosted
-            //const modelUrl = 'https://jiechau.github.io/tf_dnn_js/model.json';
             const modelUrl = 'model.json';
-            
-            // Load the model
             const model = await tf.loadLayersModel(modelUrl);
+            
+            // Explicitly set input shape
+            model.layers[0].batchInputShape = [null, 3];
+            model.layers[0].inputShape = [3];
+            
             return model;
         }
 
         async function predictCost(model, inputs) {
-            // Prepare the input tensor
             const inputTensor = tf.tensor2d([inputs]);
-            
-            // Make the prediction
             const prediction = model.predict(inputTensor);
-            
-            // Extract the prediction value
             const predictedValue = prediction.dataSync()[0];
-            
-            // Return the predicted value
             return predictedValue;
         }
 
-        // When the form is submitted
         document.getElementById('fruitForm').addEventListener('submit', async function(event) {
             event.preventDefault();
             
-            // Get the input values
             const watermelons = parseInt(document.getElementById('watermelons').value);
             const apples = parseInt(document.getElementById('apples').value);
             const grapes = parseInt(document.getElementById('grapes').value);
             
-            // Combine inputs into an array
             const inputs = [watermelons, apples, grapes];
             
-            // Load the model
             const model = await loadModel();
             
-            // Predict the cost
             const predictedCost = await predictCost(model, inputs);
             
-            // Display the result
             document.getElementById('predictionResult').innerText = `Predicted Cost: $${predictedCost.toFixed(2)}`;
         });
     </script>
