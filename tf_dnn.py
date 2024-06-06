@@ -86,8 +86,8 @@ print(f"{watermelon_qty} {apple_qty} {grape_qty} = {exact}, predict:{prediction[
 
 #model.export('save_all') # this is a dir
 #model.save('save_tf', save_format='tf') # need keras < 3.0, and doesn't work
-model.save('save/tf_dnn.keras') # 
-#model.save('save/tf_dnn.h5', save_format='h5')
+#model.save('save/tf_dnn.keras') # 
+model.save('save/tf_dnn.h5', save_format='h5')
 #import tf_keras
 #tf_keras.saving.save_model(model, 'save/tf_dnn.keras')
 #import tensorflowjs as tfjs
