@@ -39,6 +39,7 @@ Use this existing df as the training dataset to train a regression model.
 利用這個現有的 df 當做訓練數據集。訓練一個回歸的模型。
 '''
 import tensorflow as tf
+tf.keras.backend.clear_session()
 from tensorflow import keras
 from tensorflow.keras import layers
 #import tf_keras as keras # need keras < 3.0
