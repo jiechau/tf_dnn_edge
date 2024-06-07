@@ -54,7 +54,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Build the model
 model = keras.Sequential([
-    layers.InputLayer(batch_input_shape=[3], name='input_layer'),
+    layers.InputLayer(batch_input_shape=(None, 3), name='input_layer'),
     layers.Dense(64, activation='relu', name='dense_1'),
     layers.Dense(32, activation='relu', name='dense_2'),
     layers.Dense(1, activation='linear', name='output_layer')
@@ -67,7 +67,7 @@ model.compile(optimizer=optimizer, loss='mean_squared_error')
 
 # Train the model
 model.fit(X_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, validation_data=(X_test, y_test), 
-          verbose=0)
+          verbose=1)
 
 
 '''
@@ -105,9 +105,9 @@ model.save('save/tf_dnn.keras') # ok
 
 # tflite
 
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
+#converter = tf.lite.TFLiteConverter.from_keras_model(model)
 #converter.optimizations = [tf.lite.Optimize.DEFAULT] # 先不用
-tflite_quant_model = converter.convert()
+#tflite_quant_model = converter.convert()
 # Save the TensorFlow Lite model to a file
 #with open('tflite/model.tflite', 'wb') as f:
 #    f.write(tflite_quant_model)
