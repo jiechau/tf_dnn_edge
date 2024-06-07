@@ -30,6 +30,12 @@
             
             // Load the model
             const model = await tf.loadLayersModel(modelUrl);
+
+            // fix fix
+            // Specify input shape during model preparation
+            const inputShape = [null, 3]; // [batchSize, features]. null for dynamic batch size 
+            model.layers[0].batchInputShape = inputShape;
+
             return model;
         }
 

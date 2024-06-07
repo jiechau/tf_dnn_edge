@@ -54,7 +54,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Build the model
 model = keras.Sequential([
-    layers.InputLayer(input_shape=[3], name='input_layer'),
+    layers.InputLayer(shape=[3], name='input_layer'),
     layers.Dense(64, activation='relu', name='dense_1'),
     layers.Dense(32, activation='relu', name='dense_2'),
     layers.Dense(1, activation='linear', name='output_layer')
@@ -67,7 +67,7 @@ model.compile(optimizer=optimizer, loss='mean_squared_error')
 
 # Train the model
 model.fit(X_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, validation_data=(X_test, y_test), 
-          verbose=1)
+          verbose=0)
 
 
 '''
