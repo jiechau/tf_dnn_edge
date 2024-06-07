@@ -1,37 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>TensorFlow.js Model</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TensorFlow.js Inference</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script>
+        async function loadModel() {
+            const model = await tf.loadLayersModel('model.json');
+            document.getElementById('status').innerText = 'Model loaded successfully.';
+            window.model = model; // Make the model globally accessible
+        }
+
+        async function predict() {
+            if (!window.model) {
+                document.getElementById('status').innerText = 'Model not loaded.';
+                return;
+            }
+
+            // Get input values
+            const input1 = parseFloat(document.getElementById('input1').value);
+            const input2 = parseFloat(document.getElementById('input2').value);
+            const input3 = parseFloat(document.getElementById('input3').value);
+
+            // Prepare input tensor
+            const inputTensor = tf.tensor2d([[input1, input2, input3]]);
+            
+            // Perform inference
+            const prediction = window.model.predict(inputTensor);
+            const predictedValue = prediction.dataSync()[0];
+
+            document.getElementById('result').innerText = `Prediction: ${predictedValue}`;
+        }
+
+        window.onload = loadModel;
+    </script>
 </head>
 <body>
-    <h1>TensorFlow.js Model</h1>
-    <button id="loadModel">Load Model</button>
-    <button id="predict">Predict</button>
-    <div id="output"></div>
-
-    <script>
-        let model;
-
-        document.getElementById('loadModel').addEventListener('click', async () => {
-            model = await tf.loadLayersModel('model.json');
-            console.log('Model loaded successfully!');
-        });
-
-        document.getElementById('predict').addEventListener('click', () => {
-            if (model) {
-                // Sample input data
-                const input = tf.tensor2d([[1.0, 2.0, 3.0]]);
-                const prediction = model.predict(input);
-                prediction.print();  // Print the prediction to the console
-                prediction.data().then(data => {
-                    document.getElementById('output').innerText = 'Prediction: ' + data;
-                });
-            } else {
-                console.error('Model is not loaded yet');
-            }
-        });
-    </script>
+    <h1>TensorFlow.js Inference</h1>
+    <p id="status">Loading model...</p>
+    <div>
+        <label for="input1">Input 1:</label>
+        <input type="number" id="input1" step="any">
+    </div>
+    <div>
+        <label for="input2">Input 2:</label>
+        <input type="number" id="input2" step="any">
+    </div>
+    <div>
+        <label for="input3">Input 3:</label>
+        <input type="number" id="input3" step="any">
+    </div>
+    <button onclick="predict()">Predict</button>
+    <p id="result"></p>
 </body>
 </html>
 
