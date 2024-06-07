@@ -1,8 +1,8 @@
 '''
 a watermelon costs $100. an apple costs $10. a grape costs $1.
 1個西瓜100元。1個蘋果10元。一顆葡萄1元。
-created a DataFrame with 100 rows of data, where each row contains random quantities of watermelons, apples, and grapes, along with the calculated total cost. 
-創建一個包含 100 行數據的數據框架,其中每一行都包含隨機數量的西瓜、蘋果和葡萄,以及計算出的總成本。
+created a DataFrame with many rows of data, where each row contains random quantities of watermelons, apples, and grapes, along with the calculated total cost.
+創建一個資料數據集, 其中每一行都包含隨機數量的西瓜、蘋果和葡萄,以及計算出的總成本。
 '''
 
 DATA_NUM = 10_000
@@ -54,12 +54,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Build the model
 model = keras.Sequential([
-    #layers.Input(shape=(3,)),  # Ensure input shape is explicitly specified here
-    layers.Dense(64, activation='relu', input_shape=[3]),
-    layers.Dense(32, activation='relu'),
-    layers.Dense(1)
-    #layers.Dense(1, activation='linear')
-])
+    layers.InputLayer(input_shape=[3], name='input_layer'),
+    layers.Dense(64, activation='relu', name='dense_1'),
+    layers.Dense(32, activation='relu', name='dense_2'),
+    layers.Dense(1, activation='linear', name='output_layer')
+], name="tf_dnn")
 
 # Compile the model
 optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
@@ -85,6 +84,8 @@ new_data = np.array([[watermelon_qty, apple_qty, grape_qty]])  # Example input: 
 prediction = model.predict(new_data)
 print(f"{watermelon_qty} {apple_qty} {grape_qty} = {exact}, predict:{prediction[0][0]:.0f}")
 
+# tfjs
+
 #model.export('save_all') # this is a dir
 #model.save('save_tf', save_format='tf') # need keras < 3.0, and doesn't work
 model.save('save/tf_dnn.keras') # ok
@@ -101,3 +102,12 @@ model.save('save/tf_dnn.keras') # ok
 
 # Save weights to HDF5
 #model.save_weights('/tmp/tmp/my_model_tf/model.weights.h5')
+
+# tflite
+
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+#converter.optimizations = [tf.lite.Optimize.DEFAULT] # 先不用
+tflite_quant_model = converter.convert()
+# Save the TensorFlow Lite model to a file
+with open('tflite/model.tflite', 'wb') as f:
+    f.write(tflite_quant_model)
