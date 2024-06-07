@@ -6,3 +6,6 @@
 #tensorflowjs_converter --input_format=keras  save/tf_dnn.h5 tfjs/ # for .h5
 #tensorflowjs_converter --input_format=keras_keras --output_format=tfjs_layers_model save/tf_dnn.keras tfjs/
 tensorflowjs_converter --input_format=keras save/tf_dnn.h5 tfjs # ok finally with tf 2.15
+
+cp tfjs/* public/
+
