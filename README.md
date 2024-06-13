@@ -21,9 +21,31 @@
 
 ## Model Compression 
 
-- 訓練出來的模型如果體積太大，需要壓縮才能在邊緣裝置做計算。
-- 模型量化 (Quantization) 把參數的精度從 float32 轉為 int8
-- 模型的大小可以縮小 1/4
+- 訓練出來的模型可以經由一些手段 (例如量化 Quantization) 進行壓縮，代價是正確率會降低
+```
+Tensor:
+  Name: tf_dnn/dense_2/MatMul
+  Shape: [32 64]
+  Type: <class 'numpy.float32'>
+  Quantization: (0.0, 0)
+Tensor:
+  Name: tf_dnn/dense_2/MatMul
+  Shape: [32 64]
+  Type: <class 'numpy.int8'>
+  Quantization: (0.009991435334086418, 0)
+```
+- 但是檔案可以縮小
+```shell
+$ ls -l tflite/
+total 20
+-rw-r--r-- 1 jiechau_huang staff 11340  6  7 16:27 model.tflite
+-rw-r--r-- 1 jiechau_huang staff  5288  6 13 10:00 model_quant.tflite
+```
+- 其實正確率並沒有下降太多，但是這取決於使用情境的要求。
+```
+test 10_000 rounds accuracy: 1.0
+test 10_000 rounds accuracy: 0.9998999899989999
+```
 
 ## Model Convert
 
