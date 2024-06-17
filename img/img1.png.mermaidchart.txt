@@ -7,10 +7,10 @@ graph LR
   subgraph file_system_0["training an AI model"]
 
 
-    subgraph sub_B0["training data"]
+    subgraph sub_B0["model"]
         B0["<img src='https://i.imgur.com/P8U7Diw.png'/>"] 
     end
-    subgraph sub_B1["model"]
+    subgraph sub_B1["training data"]
         B1["<img src='https://i.imgur.com/n876NqC.png'/>"] 
     end
     subgraph sub_B2["Model Compression"]

@@ -4,7 +4,7 @@
 ![from repo](img/img1.png)
 
 - 如何利用邊緣裝置 (例如手機或是 PC 瀏覽器) 來執行模型的推理。
-- 假設模型都訓練好了，推理也正常，這裡使用 tensorflow keras 的架構。Edgn 端使用 tensorflow.js 及 tensorflow lite。
+- 假設模型都訓練好了，推理也正常，這裡使用 tensorflow keras 的架構。Edge 端使用 tensorflow.js 及 tensorflow lite。
 - P.S. 如果使用 pytorch 架構。Edgn 端使用 ONNX 框架。可以參考 [這裡](https://gitlab.com/jiechau/pt_dnn_edge)。
 
 ## training data / training an AI model
@@ -63,7 +63,7 @@ test 10_000 rounds accuracy: 0.9998999899989999
 ## inference
 
 - Edge 端的瀏覽器
-    - chrome 範例如 [index.html](https://jiechau.gitlab.io/tf_dnn_edge/index.html) 或 [index.html](https://jiechau.github.io/tf_dnn_edge/index.html)，( [原始檔案](https://gitlab.com/jiechau/tf_dnn_edge/-/tree/main/public?ref_type=heads) )
+    - chrome 範例如 [index.html](https://jiechau.gitlab.io/tf_dnn_edge/index.html)，( [原始檔案](https://gitlab.com/jiechau/tf_dnn_edge/-/tree/main/public?ref_type=heads) )
 
 - Edge 端的行動裝置
     - andriod 範例
