@@ -63,7 +63,7 @@ test 10_000 rounds accuracy: 0.9998999899989999
 ## inference
 
 - Edge 端的瀏覽器
-    - chrome 範例如 [index.html](https://jiechau.gitlab.io/tf_dnn_edge/index.html)，( [原始檔案](https://gitlab.com/jiechau/tf_dnn_edge/-/tree/main/public?ref_type=heads) )
+    - chrome 範例如 [index.html](https://jiechau.gitlab.io/tf_dnn_edge/index.html) 或 [index.html](https://jiechau.github.io/tf_dnn_edge/index.html)，( [原始檔案](https://gitlab.com/jiechau/tf_dnn_edge/-/tree/main/public?ref_type=heads) )
 
 - Edge 端的行動裝置
     - andriod 範例
