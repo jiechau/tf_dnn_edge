@@ -4,7 +4,8 @@
 ![from repo](img/img1.png)
 
 - 如何利用邊緣裝置 (例如手機或是 PC 瀏覽器) 來執行模型的推理。
-- 假設模型都訓練好了，推理也正常，這裡使用 tensorflow keras 的架構。
+- 假設模型都訓練好了，推理也正常，這裡使用 tensorflow keras 的架構。Edgn 端使用 tensorflow.js 及 tensorflow lite。
+- P.S. 如果使用 pytorch 架構。Edgn 端使用 ONNX 框架。可以參考 [這裡](https://gitlab.com/jiechau/pt_dnn_edge)。
 
 ## training data / training an AI model
 
@@ -21,7 +22,9 @@
 
 ## Model Compression 
 
-- 訓練出來的模型可以經由一些手段 (例如量化 Quantization) 進行壓縮，代價是正確率會降低
+- 訓練出來的模型可以經由一些手段 (例如量化 Quantization) 進行壓縮，代價是正確率會降低。
+- 壓縮一般都在模型訓練完成後進行。也可以在 Model Convert 轉檔的過程 (tensorflow.js or tensorflow lite)。
+
 ```
 Tensor:
   Name: tf_dnn/dense_2/MatMul

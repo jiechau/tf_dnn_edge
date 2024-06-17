@@ -1,33 +1,51 @@
+
+%% https://www.mermaidchart.com/
+%% https://imgur.com/
+
 graph LR
 
   subgraph file_system_0["training an AI model"]
-    subgraph sub_B0["model"]
+
+
+    subgraph sub_B0["training data"]
         B0["<img src='https://i.imgur.com/P8U7Diw.png'/>"] 
     end
-    subgraph sub_B1["training data"]
+    subgraph sub_B1["model"]
         B1["<img src='https://i.imgur.com/n876NqC.png'/>"] 
     end
-  end
-  B1 --> B0
-  B0 --> B1
+    subgraph sub_B2["Model Compression"]
+        B2["<img src='https://i.imgur.com/1Lbavdk.png'/>"] 
+    end
 
-  subgraph plugin3["Model Compression"]
-    CC2["<img src='https://i.imgur.com/1Lbavdk.png'/>"] 
   end
-  B0 -.->  CC2
+  B0 --> B1
+  B1 --> B0
+  B0 --> B2
+
+  subgraph plugin3["Model file \n .h5"]
+    CC2["<img src='https://i.imgur.com/3g1cWmX.png'/>"] 
+  end
+  B2 -->  CC2
 
   subgraph plugin4["Model Convert"]
+    
     D1["<img src='https://i.imgur.com/aueL9wd.png'/>"]
-    D0["<img src='https://i.imgur.com/3g1cWmX.png'/>"]
+    
+    subgraph sub_D0["tensorflowjs_converter"]
+        D0["<img src='https://i.imgur.com/8IuMyit.png'/>"]
+    end
+    subgraph sub_D2["tflite_convert"]
+        D2["<img src='https://i.imgur.com/3lgewWp.png'/>"]
+    end
   end
   CC2 -.->  D0
+  CC2 -.->  D2
 
   subgraph TD plugin5["inference"]
-    E1["<img src='https://i.imgur.com/8IuMyit.png'/>"]
-    E2["<img src='https://i.imgur.com/tRoGntH.png'/>"]
-    E3["<img src='https://i.imgur.com/3lgewWp.png'/>"]
+    E1["<img src='https://i.imgur.com/tp4WZq2.png'/>"]
+    E2["<img src='https://i.imgur.com/b8S3F3F.png'/>"]
+    E3["<img src='https://i.imgur.com/EpQXV9T.png'/>"]
   end
-  D0 --> |tensorflowjs_converter| E1
-  D0 --> |tflite_convert| E2
-  D0 --> |tflite_convert| E3
-
+  D0 --> |model.json,*.bin| E1
+  D2 --> |model.tflite| E2
+  D2 --> |model.tflite| E3
