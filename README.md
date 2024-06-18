@@ -3,13 +3,13 @@
 
 - 如何利用邊緣裝置 (例如手機或是 PC 瀏覽器) 來執行模型的推理。
 - 假設模型都訓練好了，推理也正常，這裡使用 tensorflow keras 的架構。Edge 端使用 tensorflow.js 及 tensorflow lite。
-- P.S. 如果使用 pytorch 架構。Edgn 端使用 ONNX 框架。可以參考 [這裡](https://gitlab.com/jiechau/pt_dnn_edge)。
+- P.S. 如果使用 pytorch 架構。Edge 端使用 ONNX 框架。可以參考 [這裡](https://gitlab.com/jiechau/pt_dnn_edge)。
 
 ![from repo](img/img1.png)
 
 ## training data / training an AI model
 
-- 人工智慧系統就像一個複雜的計算機程式, 它能夠接收大量訓練資料, 就如同輸入無數的例題和答案一般。透過機器學習, 這個程式能自動從訓練資料中發現潛在的規則和模式。
+- 人工智慧系統就像一個複雜的計算機程式, 它能夠接收大量訓練資料, 如同輸入無數的例題和答案一般。透過機器學習, 這個程式能自動從訓練資料中發現潛在的規則和模式。
 
 - 假設我們有一個待解決的問題, 例如你不知道每種水果的單價, 但卻有過去購買不同組合數量時的總價資料。有了這些歷史資料,我們就希望能得到一種工具, 只要輸入各種水果的數量, 就能推理出應付的總價錢。這裡我們沒有想要知道 單價。
 
@@ -18,6 +18,7 @@
 <img src="img/img2.png" width="75%" height="75%">
 
 - 由於這裡說的是邊緣計算。我們先假設這些人工智慧的訓練方式都已經完成，模型也訓練好了，也可以正常使用。
+
 - 訓練好的模型在 [/save/tf_dnn.h5](https://gitlab.com/jiechau/tf_dnn_edge/blob/main/save/tf_dnn.h5)，你可以在 [這裡](https://colab.research.google.com/drive/1tSGHG66SPwY1IPXWLW7VIWmc0JIx9eh1?usp=sharing) 看到它執行推理: 輸入不同數量的 西瓜/蘋果/葡萄，可以推理出總價錢。
 
 ## Model Compression 
@@ -54,7 +55,7 @@ test 10_000 rounds accuracy: 0.9998999899989999
 
 - 將訓練好的模型轉為 tensorflow.js 可以讀取的格式。Edge 端的 瀏覽器例如 chrome 就能運行.
     - 轉出的檔案是: 一個 model.json 和一些 .bin 的檔案，[這裡](https://gitlab.com/jiechau/tf_dnn_edge/-/tree/main/tfjs?ref_type=heads)。
-    - 將這些檔案交給前端開發人員
+    - 將這些檔案交給 前端 開發人員
 
 - 將訓練好的模型轉為 tensorflow lite 可以讀取的格式。Edge 端的 手機例如 andriod/ios 就能運行.
     - 轉出的檔案是: 一個 model.tflite，[這裡](https://gitlab.com/jiechau/tf_dnn_edge/-/tree/main/tflite?ref_type=heads)。
@@ -67,5 +68,5 @@ test 10_000 rounds accuracy: 0.9998999899989999
 
 - Edge 端的行動裝置
     - andriod 範例
-    - ios 範例
+    - ios 範例 [這裡](https://gitlab.com/django_lin/tf_lite_iOS/-/tree/main?ref_type=heads)
 
